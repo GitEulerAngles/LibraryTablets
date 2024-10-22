@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Group Study 456</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Group Study 456</h1>
+      <h1 id="time-display"></h1>
+      <h1 id="date-display"></h1>
+    </header>
+
+    <div class="gray-bar-side">
+        <ul id="gray-bar-input"></ul>
+    </div>
+
+    <main>
+        <button id="show-form-button">+</button>
+      
+        <section class="study-section" id="reservation-form" style="display: none;">
+          <h2>RESERVE ROOM</h2>
+          <p>Please enter the details to reserve your study room.</p>
+          
+          <div class="input-area">
+            <label for="start-time">Enter Start Time:</label>
+            <input type="time" id="start-time" placeholder="Enter Start Time">
+      
+            <label for="end-time">Enter End Time:</label>
+            <input type="time" id="end-time" placeholder="Enter End Time">
+        
+            <br>
+      
+            <label for="nuid">Enter NUID:</label>
+            <input type="text" id="nuid" placeholder="Enter NUID">
+        
+            <label for="name">Enter Name:</label>
+            <input type="text" id="name" placeholder="Enter Name">
+            
+            <button id="reserve-room">RESERVE ROOM</button>
+          </div>
+        </section>
+    </main>
+
+    <div id="available" class="available-text">Available</div>
+    <div class="gray-bar-bottom"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
