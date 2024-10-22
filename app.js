@@ -365,9 +365,42 @@ function displayReservations() {
     });
 }
 
+function updateProgressBar() {
+    const progressBar = document.querySelector('.progress-bar');
+    const availabilityDisplay = document.getElementById('available');
+
+    const now = new Date();
+    const today = now.toISOString().split('T')[0];
+
+    const activeReservation = reservations.find(reservation => {
+        const existingStartTime = new Date(`${reservation.date}T${convertTo24Hour(reservation.startTime)}:00`);
+        const existingEndTime = new Date(`${reservation.date}T${convertTo24Hour(reservation.endTime)}:00`);
+        return reservation.date === today && now >= existingStartTime && now < existingEndTime;
+    });
+
+    if (activeReservation) {
+        const startTime = new Date(`${activeReservation.date}T${convertTo24Hour(activeReservation.startTime)}:00`);
+        const endTime = new Date(`${activeReservation.date}T${convertTo24Hour(activeReservation.endTime)}:00`);
+        const totalTime = endTime - startTime;
+        const elapsedTime = now - startTime;
+
+        const progressPercentage = Math.min((elapsedTime / totalTime) * 100, 100);
+
+        progressBar.style.width = `${progressPercentage}%`;
+        availabilityDisplay.textContent = "Unavailable";
+        availabilityDisplay.style.color = "red";
+    } else {
+        progressBar.style.width = 0;
+        availabilityDisplay.textContent = "Available";
+        availabilityDisplay.style.color = "#258357";
+    }
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
     generateCalendarGrid();
     updateTimeAndDate();
     addListener();
     setInterval(updateTimeAndDate, 1000);
+    setInterval(updateProgressBar, 1000);
 });

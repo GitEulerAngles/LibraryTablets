@@ -206,6 +206,13 @@ button:hover {
     z-index: 1;
 }
 
+.progress-bar {
+    width: 0%; /* Start with zero width */
+    height: 100%;
+    background-color: #4caf50; /* Green color to indicate progress */
+    transition: width 1s linear; /* Smooth width transition */
+}
+
 .gray-bar-side {
     position: absolute;
     top: 10px;
