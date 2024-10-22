@@ -20,7 +20,9 @@
     </div>
 
     <main>
-        <button id="show-form-button">+</button>
+        <button id="show-form-button">Reserve</button>
+        <button id="show-calendar-button">Calendar</button>
+        <button id="show-back-button">Back</button>
       
         <section class="study-section" id="reservation-form" style="display: none;">
           <h2>RESERVE ROOM</h2>
@@ -42,9 +44,35 @@
             <input type="text" id="name" placeholder="Enter Name">
             
             <button id="reserve-room">RESERVE ROOM</button>
+            <button id="reserve-back-button">BACK</button>
           </div>
         </section>
+
+        <section class="study-section" id="reservation-modal" style="display: none;">
+          <h2>Reserve Time Slot</h2>
+          <p id="selected-date-time"></p>
+        
+          <div class="input-area">
+              <label for="modal-name">Enter Name:</label>
+              <input type="text" id="modal-name" placeholder="Enter Name">
+          
+              <button id="confirm-reservation">Confirm Reservation</button>
+          </div>
+      </section>
     </main>
+
+    <section id="calendar-section" style="display: none">
+      <div class="calendar-container">
+        <div class="time-column">
+        </div>
+        <div class="day-container">
+          <div class="day-headers">
+          </div>
+          <div class="day-grid">
+          </div>
+        </div>
+      </div>
+    </section>
 
     <div id="available" class="available-text">Available</div>
     <div class="gray-bar-bottom"></div>
