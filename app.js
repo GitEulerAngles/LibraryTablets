@@ -70,20 +70,20 @@ function generateCalendarGrid() {
             const currentDate = new Date(today);
             currentDate.setDate(today.getDate() + dayOffset);
 
+            const formattedDate = currentDate.toLocaleDateString('en-CA');
+
             if (hour === 0) {
                 const dayHeader = document.createElement("div");
-                dayHeader.textContent = currentDate.toLocaleDateString();
+                dayHeader.textContent = formattedDate;
                 dayHeaders.appendChild(dayHeader);
             }
 
             const timeSlot = document.createElement("div");
-            const startHour = `${hour + 1}`;
-            timeSlot.setAttribute('data-date', currentDate.toISOString().split('T')[0]);
-            timeSlot.setAttribute('data-hour', `${startHour}:00`);
+            timeSlot.setAttribute('data-date', formattedDate);
+            timeSlot.setAttribute('data-hour', `${hour}:00`);
             timeSlot.classList.add('time-slot');
 
             const reservation = isSlotReserved(timeSlot);
-
             if (reservation) {
                 timeSlot.classList.add('reserved');
                 timeSlot.textContent = `Reserved - ${reservation}`;
@@ -139,8 +139,6 @@ function reserveTimeSlot(slot) {
             name: userName
         });
 
-        console.log(reservations);
-
         modal.style.display = 'none';
         generateCalendarGrid();
         document.getElementById('calendar-section').style.display = 'grid';
@@ -190,16 +188,22 @@ function updateTimeAndDate() {
 
     let currentTotalMinutes = now.getHours() * 60 + now.getMinutes();
 
+    const todayDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+
     let isAvailable = true;
 
     reservations.forEach(reservation => {
+        if (reservation.date !== todayDate) {
+            return;
+        }
+
         let [startHours, startMinutes] = reservation.startTime.split(':');
         let [endHours, endMinutes] = reservation.endTime.split(':');
         
         let startTimeTotalMinutes = convertTo24HourMinutes(startHours, startMinutes, reservation.startTime.includes('PM'));
         let endTimeTotalMinutes = convertTo24HourMinutes(endHours, endMinutes, reservation.endTime.includes('PM'));
 
-        if (currentTotalMinutes >= startTimeTotalMinutes && currentTotalMinutes <= endTimeTotalMinutes) {
+        if (currentTotalMinutes >= startTimeTotalMinutes && currentTotalMinutes < endTimeTotalMinutes) {
             isAvailable = false;
         }
     });
@@ -301,8 +305,7 @@ function addListener() {
             return;
         }
         
-        let today = new Date();
-        let date = today.toISOString().split('T')[0];
+        const date = new Date().toLocaleDateString('en-CA');
     
         let formattedStartTime = formatTimeTo12Hour(startTime);
         let formattedEndTime = formatTimeTo12Hour(endTime);
@@ -349,7 +352,7 @@ function addListener() {
 }
 
 function displayReservations() {
-    const today = new Date().toISOString().split('T')[0];
+    const today = new Date().toLocaleDateString('en-CA');
 
     const todayReservations = reservations
         .filter(reservation => reservation.date === today)
@@ -370,29 +373,26 @@ function updateProgressBar() {
     const availabilityDisplay = document.getElementById('available');
 
     const now = new Date();
-    const today = now.toISOString().split('T')[0];
+    const today = now.toLocaleDateString('en-CA');
 
     const activeReservation = reservations.find(reservation => {
         const existingStartTime = new Date(`${reservation.date}T${convertTo24Hour(reservation.startTime)}:00`);
         const existingEndTime = new Date(`${reservation.date}T${convertTo24Hour(reservation.endTime)}:00`);
+
         return reservation.date === today && now >= existingStartTime && now < existingEndTime;
     });
 
     if (activeReservation) {
         const startTime = new Date(`${activeReservation.date}T${convertTo24Hour(activeReservation.startTime)}:00`);
         const endTime = new Date(`${activeReservation.date}T${convertTo24Hour(activeReservation.endTime)}:00`);
+
         const totalTime = endTime - startTime;
         const elapsedTime = now - startTime;
 
         const progressPercentage = Math.min((elapsedTime / totalTime) * 100, 100);
-
         progressBar.style.width = `${progressPercentage}%`;
-        availabilityDisplay.textContent = "Unavailable";
-        availabilityDisplay.style.color = "red";
     } else {
-        progressBar.style.width = 0;
-        availabilityDisplay.textContent = "Available";
-        availabilityDisplay.style.color = "#258357";
+        progressBar.style.width = "0%";
     }
 }
 
