@@ -14,25 +14,25 @@ README.txt Directory:
 
 */ Project Overview /*
 
-<!-- This project aims to improve the functionality of the study room tablets at the University of Nebraska-Lincoln (UNL). These tablets are placed outside study rooms to display availability/reserved. We are enhancing the system with the ability to reserve rooms directly from the tablet, a map of the library, book rooms through the tablet, and in advance through a calendar interface. -->
+This project aims to improve the functionality of the study room tablets at the University of Nebraska-Lincoln (UNL). These tablets are placed outside study rooms to display availability/reserved. We are enhancing the system with the ability to reserve rooms directly from the tablet, a map of the library, book rooms through the tablet, and in advance through a calendar interface.
 
 */ Features /*
-<!-- 
+
 - **Room Availability Display**: Shows whether the study room is available or occupied.
 - **Direct Reservation**: Users can reserve the room directly from the tablet.
 - **Map Integration**: Displays a map of the library, allowing users to find and reserve other rooms.
-- **Calendar Booking**: Allows users to reserve rooms days or weeks in advance. -->
+- **Calendar Booking**: Allows users to reserve rooms days or weeks in advance.
 
 */ Project Structure with Node.js /*
 
-<!-- 
+
 /node_modules 
 # Node.js dependencies app.js 
 # Main application logic for the room reservation system index.html
 # Main HTML file for the study room tablet UI package-lock.json 
 # Dependency lock file (auto-generated) package.json 
 # Project metadata and dependencies styles.css 
-# Styling for the user interface -->
+# Styling for the user interface
 
 */ How to Run Program /*
 To run the project locally, follow these steps:
