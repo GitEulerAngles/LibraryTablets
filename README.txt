@@ -1,6 +1,16 @@
 Project made by Kurt Kuhlman
 
+Project overview:
+This project aims to improve the graphical user interface outside of the study rooms at the library for the University of Nebraska-Lincoln. 
+It dynamically updates its date and time according to the user's computer and will correctly display that the simulated room is reserved if the time the user enters in the reservation screen is between their current time.
+The home screen allows the user to see the reservations for today and gives a visual if the simulated room is currently reserved.
+The calendar screen allows the user to book the current simulated room days in advance and displays which rooms are already booked.
+
 Startup instruction:
+ - The project's dependencies and code should already be pre-compiled. Inside of the project's directory, click on the "index.html" file and the webpage should run.
+ - If the webpage does not run, please follow the alternative startup instructions down below.
+
+Alternative startup instruction:
  - Installing Node.js and npm...
     If node isn't installed already, download and install node.js from https://nodejs.org/.
     Verify that node.js has successfully installed by running the following commands in a terminal or command prompt:
