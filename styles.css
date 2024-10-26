@@ -154,14 +154,14 @@ button:hover {
   
 .time-slot {
     cursor: pointer;
-  }
+}
   
-  .time-slot.reserved {
+.time-slot.reserved {
     background-color: #f8c291;
     color: #fff;
     text-align: center;
     font-weight: bold;
-  }
+}
 
 .day-container {
     display: flex;
@@ -223,6 +223,30 @@ button:hover {
     z-index: 1;
     padding: 20px;
     box-sizing: border-box;
+}
+
+.gray-bar-title {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 300px;
+    height: 700px;
+
+    font-size: 30px;
+    color: #333;
+
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.gray-bar-input {
+    position: absolute;
+    top: 60px;
+    left: 10px;
+
+    font-size: 16px;
+    color: #333;
 }
 
 .gray-bar-side p {
